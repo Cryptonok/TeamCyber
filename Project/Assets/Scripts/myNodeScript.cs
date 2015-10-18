@@ -12,6 +12,11 @@ public class myNodeScript : MonoBehaviour {
     bool selected;
     TextMesh text;
 
+	//What happens when a unit reaches this node
+	public void unitHit() {
+		//TODO
+	}
+
 	// Use this for initialization
 	void Start () {
         text = ass.GetComponent<TextMesh>();

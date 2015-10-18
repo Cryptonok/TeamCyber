@@ -2,15 +2,16 @@
 using System.Collections;
 
 public class UnitHandlerScript : MonoBehaviour {
+
+	ArrayList units;
 	
 	// Use this for initialization
 	void Start () {
-		
+		units = new ArrayList();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 	}
 	
 	public void createUnit(GameObject nodeA, GameObject nodeB, float speed)
@@ -25,5 +26,6 @@ public class UnitHandlerScript : MonoBehaviour {
 		mover.targetObject = nodeB;
 		mover.useObjectAsTarget = true;
 		mover.startMoving();
+		units.Add(newUnit);
 	}
 }

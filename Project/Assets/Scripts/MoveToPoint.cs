@@ -30,7 +30,12 @@ public class MoveToPoint : MonoBehaviour {
 
     public void destinationReached()
     {
-        //Put stuff here
+		//Tell the node you reached it
+		if(targetObject != null) {
+			targetObject.GetComponent<myNodeScript>().unitHit();
+		}
+		//Despawn Unit
+		GameObject.Destroy(gameObject);
     } 
 
 	// Use this for initialization
