@@ -23,6 +23,8 @@ public class GameScript : MonoBehaviour
     {
         if(clicker.team == 1)
         {
+			//Spawn unit
+			GetComponent<UnitHandlerScript>().createUnit(selected.gameObject, clicker.gameObject, 0.02f);
             //enemy node
             fight(clicker);
 
@@ -41,6 +43,8 @@ public class GameScript : MonoBehaviour
         }
         else if (clicker.team == selected.team)
         {
+			//Spawn unit
+			GetComponent<UnitHandlerScript>().createUnit(selected.gameObject, clicker.gameObject, 0.02f);
             //clicked ally node
             clicker.army += selected.army;
             selected.army = 0;
@@ -49,10 +53,10 @@ public class GameScript : MonoBehaviour
         }
         else
         {
+			//Spawn unit
+			GetComponent<UnitHandlerScript>().createUnit(selected.gameObject, clicker.gameObject, 0.02f);
             //clicked enemy node
             fight(clicker);
-            
-
         }
     }
     public void fight(myNodeScript clicker)
@@ -80,6 +84,5 @@ public class GameScript : MonoBehaviour
             selected = null;
 
         }
-
     }
 }

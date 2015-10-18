@@ -71,6 +71,7 @@ public class MoveToPoint : MonoBehaviour {
                 {
                     GetComponent<Transform>().position += (normalizedVector * speed);
                 }
+				GetComponent<Transform>().rotation = Quaternion.FromToRotation(Vector3.left, path);
             }
         }
 	}
