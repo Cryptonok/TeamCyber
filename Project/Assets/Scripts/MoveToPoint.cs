@@ -9,6 +9,8 @@ public class MoveToPoint : MonoBehaviour {
     public bool useObjectAsTarget;
     public GameObject targetObject;
 
+	private Transform pos;
+
     public bool isMoving;
     public bool destReached;
 
@@ -41,6 +43,12 @@ public class MoveToPoint : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+		Vector3 path;
+		pos = GetComponent<Transform> ();
+		path = targetObject.GetComponent<Transform>().position - pos.position;
+		Vector3 normalizedVector = path.normalized;
+		pos.position += normalizedVector;
+
 	}
 	
 	// Update is called once per frame
@@ -55,18 +63,18 @@ public class MoveToPoint : MonoBehaviour {
                 Vector3 path;
                 if (useObjectAsTarget)
                 {
-                    path = targetObject.GetComponent<Transform>().position - GetComponent<Transform>().position;
+                    path = targetObject.GetComponent<Transform>().position - pos.position;
                 }
                 else
                 {
-                    path = targetPosition - GetComponent<Transform>().position;
+                    path = targetPosition - pos.position;
                 }
                 Vector3 normalizedVector = path.normalized;
 
                 //Path is complete, reach destination
                 if (speed >= path.magnitude)
                 {
-                    GetComponent<Transform>().position += path;
+                    pos.position += path;
                     destReached = true;
                     destinationReached();
                     isMoving = false;
@@ -74,9 +82,9 @@ public class MoveToPoint : MonoBehaviour {
                 //Path is incomplete, increment position by speed
                 else
                 {
-                    GetComponent<Transform>().position += (normalizedVector * speed);
+                    pos.position += (normalizedVector * speed);
                 }
-				GetComponent<Transform>().rotation = Quaternion.FromToRotation(Vector3.left, path);
+				pos.rotation = Quaternion.FromToRotation(Vector3.left, path);
             }
         }
 	}

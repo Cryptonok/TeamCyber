@@ -23,12 +23,14 @@ public class GameScript : MonoBehaviour
     }
     public void clicked(myNodeScript clicker)
     {
-        if(clicker.team == 1)
+        if(clicker.gameObject.tag == "Enemy")
         {
-			//Spawn unit
-			handler.createUnit(selected.gameObject, clicker.gameObject, 0.02f);
             //enemy node
-            fight(clicker);
+			if(selected != null){
+				//Spawn unit
+				handler.createUnit(selected.gameObject, clicker.gameObject, 0.02f);
+            	fight(clicker);
+			}
 
         }
         else if (selected == null)
@@ -36,14 +38,14 @@ public class GameScript : MonoBehaviour
             //no node selected
             selected = clicker;
             clicker.color.color = Color.blue;
+			return;
         }
         else if (clicker.Equals(selected))
         {
             //clicked already selected node
-            selected = null;
             clicker.color.color = Color.white;
         }
-        else if (clicker.team == selected.team)
+        else if (clicker.gameObject.tag == selected.gameObject.tag)
         {
 			//Spawn unit
 			handler.createUnit(selected.gameObject, clicker.gameObject, 0.02f);
@@ -51,7 +53,6 @@ public class GameScript : MonoBehaviour
             clicker.army += selected.army;
             selected.army = 0;
             selected.color.color = Color.white;
-            selected = null;
         }
         else
         {
@@ -60,22 +61,19 @@ public class GameScript : MonoBehaviour
             //clicked enemy node
             fight(clicker);
         }
+		selected = null;
     }
     public void fight(myNodeScript clicker)
     {
-        if (selected == null)
-        {
-            return;
-        } 
-        else if (clicker.army - selected.army < 0)
+
+        if (clicker.army - selected.army < 0)
         {
             //conquered
             clicker.army = selected.army - clicker.army;
-            clicker.team = selected.team;
+            clicker.gameObject.tag = selected.gameObject.tag;
             clicker.color.color = Color.white;
             selected.army = 0;
             selected.color.color = Color.white;
-            selected = null;
         }
         else
         {
@@ -83,8 +81,6 @@ public class GameScript : MonoBehaviour
             clicker.army -= selected.army;
             selected.army = 0;
             selected.color.color = Color.white;
-            selected = null;
-
         }
     }
 }

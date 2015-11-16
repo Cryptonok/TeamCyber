@@ -31,5 +31,17 @@ public class myNodeScript : MonoBehaviour {
         handler.clicked(this);
     }
 
+	void OnCollisionEnter2D (Collision2D coll) {
+		if (coll.gameObject.tag == gameObject.tag) {
+			army += 1;
+		}
+		else {
+			army -=1 ;
+		}
+		Destroy(coll.gameObject);
+
+
+	}
+
     
 }
