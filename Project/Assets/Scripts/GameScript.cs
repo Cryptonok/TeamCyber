@@ -30,7 +30,8 @@ public class GameScript : MonoBehaviour
 			if (selected != null) {
 				//Spawn unit
 				handler.createUnit (selected.gameObject, clicker.gameObject, 0.02f);
-				fight (clicker);
+				//fight (clicker);
+                selected.color.color = Color.white;
 			}
 		} else if (selected == null) {
 			//no node selected
@@ -45,15 +46,16 @@ public class GameScript : MonoBehaviour
 			//Spawn unit
 			handler.createUnit (selected.gameObject, clicker.gameObject, 0.02f);
 			//clicked ally node
-			clicker.army += selected.army;
-			selected.army = 0;
+			//clicker.army += selected.army;
+			//selected.army = 0;
 			selected.color.color = Color.white;
 
 		} else {
 			//Spawn unit
 			handler.createUnit (selected.gameObject, clicker.gameObject, 0.02f);
 			//clicked enemy node
-			fight (clicker);
+			//fight (clicker);
+            selected.color.color = Color.white;
 		}
 		selected = null;
 	}

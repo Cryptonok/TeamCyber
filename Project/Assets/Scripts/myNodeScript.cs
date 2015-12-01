@@ -12,10 +12,6 @@ public class myNodeScript : MonoBehaviour
 	public SpriteRenderer color;
 	bool selected;
 
-	public void unitHit ()
-	{
-		//TODO
-	}
 	// Use this for initialization
 	void Start ()
 	{
@@ -36,13 +32,26 @@ public class myNodeScript : MonoBehaviour
 
 	void OnCollisionEnter2D (Collision2D coll)
 	{
-		if (coll.gameObject.tag == gameObject.tag) {
-			army += 1;
-		} else {
-			army -= 1;
-		}
-		Destroy (coll.gameObject);
-
+        if (coll.gameObject.GetComponent<MoveToPoint>().targetObject.Equals(gameObject))
+        {
+            if (coll.gameObject.tag == gameObject.tag)
+            {
+                army += 1;
+            }
+            else
+            {
+                army -= 1;
+            }
+            Destroy(coll.gameObject);
+            if (army <= 0)
+            {
+                gameObject.tag = coll.gameObject.tag;
+            }
+        }
+        else
+        {
+            Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(), coll.collider);
+        }
 
 	}
 

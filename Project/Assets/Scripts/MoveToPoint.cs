@@ -31,10 +31,6 @@ public class MoveToPoint : MonoBehaviour
 
 	public void destinationReached ()
 	{
-		//Tell the node you reached it
-		if (targetObject != null) {
-			targetObject.GetComponent<myNodeScript> ().unitHit ();
-		}
 		//Despawn Unit
 		GameObject.Destroy (gameObject);
 	} 
